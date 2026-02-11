@@ -1,3 +1,30 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Category, Complaint
 
-# Create your views here.
+
+def home(request):
+    return redirect('report_complaint')
+
+
+@login_required
+def report_complaint(request):
+    categories = Category.objects.all()
+
+    if request.method == "POST":
+        category_id = request.POST.get('category')
+        description = request.POST.get('description')
+
+        category = Category.objects.get(id=category_id)
+
+        Complaint.objects.create(
+            citizen=request.user,
+            category=category,
+            description=description
+        )
+
+        return redirect('report_complaint')
+
+    return render(request, 'issues/report_complaint.html', {
+        'categories': categories
+    })
