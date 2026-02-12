@@ -28,3 +28,11 @@ def report_complaint(request):
     return render(request, 'issues/report_complaint.html', {
         'categories': categories
     })
+@login_required
+def my_complaints(request):
+    complaints = Complaint.objects.filter(citizen=request.user).order_by('-created_at')
+
+    return render(request, 'issues/my_complaints.html', {
+        'complaints': complaints
+    })
+
