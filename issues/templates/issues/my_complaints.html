@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Complaints</title>
+    <link rel="stylesheet" href="{% static 'issues/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h1>My Submitted Complaints</h1>
+
+    <div class="card">
+        {% if complaints %}
+            <table class="complaint-table">
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+                {% for complaint in complaints %}
+                <tr>
+                    <td>{{ complaint.category.name }}</td>
+                    <td>{{ complaint.description }}</td>
+                    <td class="status">{{ complaint.status }}</td>
+                    <td>{{ complaint.created_at|date:"d M Y" }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No complaints submitted yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

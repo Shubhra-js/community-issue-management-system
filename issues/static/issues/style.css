@@ -81,3 +81,23 @@ textarea {
 .btn:hover {
     background-color: #145a4a;
 }
+.complaint-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.complaint-table th,
+.complaint-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.complaint-table th {
+    background-color: #1f4037;
+    color: white;
+}
+
+.status {
+    font-weight: bold;
+}
